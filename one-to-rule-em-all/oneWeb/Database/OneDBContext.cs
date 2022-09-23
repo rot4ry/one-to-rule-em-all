@@ -7,7 +7,7 @@ namespace oneWeb.Database {
     }
 
     // TODO: Add models
-    //public DbSet<HotelModel> Hotels { get; set; }
+    public DbSet<HotelModel> Hotels { get; set; }
     //public DbSet<UserModel> Users { get; set; }
   }
 }
