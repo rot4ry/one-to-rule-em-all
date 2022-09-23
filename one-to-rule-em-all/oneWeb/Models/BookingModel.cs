@@ -13,9 +13,9 @@ namespace oneWeb.Models {
     public int HotelId { get; set; }
 
     [Required]
-    public DateOnly DateStart { get; set; }
+    public DateTime DateStart { get; set; }
     
     [Required]
-    public DateOnly DateEnd { get; set; }
+    public DateTime DateEnd { get; set; }
   }
 }
