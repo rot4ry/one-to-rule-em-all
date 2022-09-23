@@ -6,7 +6,7 @@ namespace oneWeb.Models {
     [Key]
     public int Id { get; set; }
     
-    [ForeignKey("Id")] // test?
+    [ForeignKey("Id")] // test? needed?
     public int HotelId { get; set; }
 
     [Required]

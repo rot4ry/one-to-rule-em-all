@@ -9,9 +9,9 @@ namespace oneWeb.Database {
     // done
     public DbSet<HotelModel> Hotels { get; set; }
     public DbSet<PhotoModel> Photos { get; set; }
+    public DbSet<UserModel> Users { get; set; }
     
     // todo
-    public DbSet<UserModel> Users { get; set; }
     public DbSet<BookingModel> Bookings { get; set; }
   }
 }
