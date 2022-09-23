@@ -7,7 +7,7 @@ namespace oneWeb.Models {
 
     [Required]
     [MinLength(5)]
-    public string HotelName { get; set; }
+    public string Name { get; set; }
 
     [Required]
     public string Country { get; set; }
