@@ -6,8 +6,9 @@ namespace oneWeb.Database {
     public OneDBContext (DbContextOptions<OneDBContext> options) : base(options) {
     }
 
-    // TODO: Add models
     public DbSet<HotelModel> Hotels { get; set; }
+    
+    // TODO: Add models
     //public DbSet<UserModel> Users { get; set; }
   }
 }
