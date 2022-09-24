@@ -20,6 +20,7 @@ namespace oneWeb.Controllers {
       return View();
     }
 
+    //TODO
     //[HttpPost]
     //[ValidateAntiForgeryToken]
     //public async Task<IActionResult> Create ([Bind("Id,Name")] HotelModel hotel) {
@@ -30,5 +31,20 @@ namespace oneWeb.Controllers {
     //  }
     //  return View(hotel);
     //}
+
+    // TODO
+    public IActionResult Details (int? id) {
+      return View();
+    }
+
+    // TODO
+    public IActionResult Edit (int? id) {
+      return View();
+    }
+
+    // TODO
+    public IActionResult Delete (int? id) {
+      return View();
+    }
   }
 }
