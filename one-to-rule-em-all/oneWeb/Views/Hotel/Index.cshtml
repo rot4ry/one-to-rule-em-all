@@ -5,76 +5,52 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Hotels</h1>
-<div style="width: 100%;padding: 1rem; align-self: center;
-  border: 0.2rem solid black; border-radius: 0.3rem"
->
-  @*table header*@
-  <div style="display: flex; justify-content: space-around; align-items: center;
-    height: 10%; border: 0.2rem black solid; font-size: 1.5rem"
-  >
-    <div style="width: 35%"></div>
-    <div style="min-width: 10%;"
-    >@Html.DisplayNameFor(model => model.Name)</div>
+<div style="display: flex; justify-content: space-between; padding: 2% 0 1% 0">
+  <h1>&nbsp;Hotels</h1>
+  <button style="background-color: forestgreen; width: 10%; font-size: 1.3rem;">
+    Add hotel
+  </button>
+</div>
 
-    <div style="min-width: 10%;"
-    >@Html.DisplayNameFor(model => model.Country)</div>
-
-    <div style="min-width: 10%;"
-    >@Html.DisplayNameFor(model => model.City)</div>
-
-    <div style="max-width: 20%;"
-    >@Html.DisplayNameFor(model => model.Address)</div>
-  </div>
-  
-  @foreach (var hotel in Model) {
-    <div style="display: flex; justify-content: space-around; align-items: center; padding: 0.5%;"
+<div style="padding: 1rem; border: 0.2rem solid darkred; border-radius: 0.3rem;">
+  @foreach(var hotel in Model) {
+    <div style="width: 100%; padding: 1rem; margin-bottom: 0.5rem; border-radius: 0.5rem; background-color:darkslategrey;
+      display: flex;"
     >
-      <div style="width: 35%">
-        <img src="~/img/placeholder.png"
-          style="width: 100%; display: block;"
-        />
+      <div style="width: 40%">
+        <img src="~/img/placeholder.png" style="width: 100%; display: block;"/>
       </div>
-            <div style="border: 0.1rem solid red; min-width: 10%;">
-                @hotel.Name
-            </div>
 
-            <div style="border: 0.1rem solid red; min-width: 10%;">
-                @Html.DisplayNameFor(model => model.Country)
-            </div>
+      <div style="padding: 0 2rem 0 2rem; width: 60%; font-size: 2rem;
+        display: flex; flex-direction: column; justify-content: space-evenly;"
+      >
+                <div style="display: flex;">
+                    <div style="width: 40%; color: lightgreen">@Html.DisplayNameFor(model => model.Name)</div>
+                    <div style="width: 60%;">@hotel.Name</div>
+                </div>
 
-            <div style="border: 0.1rem solid red; min-width: 10%;">
-                @Html.DisplayNameFor(model => model.City)
-            </div>
+                <div style="display: flex;">
+                    <div style="width: 40%; color: lightgreen;">@Html.DisplayNameFor(model => model.Country)</div>
+                    <div style="width: 60%;">@hotel.Country</div>
+                </div>
 
-            <div style="border: 0.1rem solid red;max-width: 20%;">
-                @Html.DisplayNameFor(model => model.Address)
-            </div>
-        </div>
-    }
-  @*<table style="width: 100%;">
-    <thead style="height: 20%; border: 0.1rem red solid;">
-      <tr style="height: 100%">
-        <th></th>
-        <th>@Html.DisplayNameFor(model => model.Name)</th>
-        <th>@Html.DisplayNameFor(model => model.Country)</th>
-        <th>@Html.DisplayNameFor(model => model.City)</th>
-        <th>@Html.DisplayNameFor(model => model.Address)</th>
-      </tr>
-    </thead>
-  
-    <tbody>
-      @foreach (var hotel in Model) {
-        <tr>
-          <td width="30%">
-            <img src="~/img/placeholder.png" style="width: 100%; display: block">
-          </td>
-          <td width="15%">@hotel.Name</td>
-          <td width="10%">@hotel.Country</td>
-          <td width="15%">@hotel.City</td>
-          <td width="30%">@hotel.Address</td>
-        </tr>
-      }
-    </tbody>
-  </table>*@
+                <div style="display: flex;">
+                    <div style="width: 40%; color: lightgreen">@Html.DisplayNameFor(model => model.City)</div>
+                    <div style="width: 60%;">@hotel.City</div>
+                </div>
+
+                <div style="display: flex;">
+                    <div style="width: 40%; color: lightgreen">@Html.DisplayNameFor(model => model.Address)</div>
+                    <div style="width: 60%;">@hotel.Address</div>
+                </div>
+
+                <div style="display: flex;">
+                    <button style="width: 100%; border-radius: 0.3rem;"
+                      type="button" value="@hotel.Id"
+                      onclick="location.href='@Url.Action("Details", "Hotel")'"
+                    >See more</button>
+                </div>
+      </div>
+    </div>
+  }
 </div>
