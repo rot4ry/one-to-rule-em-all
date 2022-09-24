@@ -51,10 +51,18 @@ namespace oneWeb.Controllers {
       return View(hotel);
     }
 
-    // TODO
-    // Change return types!
-    public IActionResult Edit (int? id) {
-      return View();
+    // GET: Edit hotel
+    public async Task<IActionResult> Edit (int? id) {
+      if (id == null) {
+        return NotFound();
+      }
+
+      HotelModel? hotel = await _dbContext.Hotels.FirstOrDefaultAsync(h => h.Id == id);
+      if (hotel == null) {
+        return NotFound();
+      }
+
+      return View(hotel);
     }
 
     // TODO
