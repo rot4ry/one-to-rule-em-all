@@ -5,7 +5,7 @@ namespace oneWeb.Models {
   public class HotelModel {
     [Key]
     public int Id { get; set; }
-
+    
     [Required]
     [MinLength(5)]
     [DisplayName("Hotel")]

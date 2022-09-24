@@ -24,7 +24,7 @@ namespace oneWeb.Controllers {
     // POST: Create hotel
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create ([Bind("Id,Name")] HotelModel hotel) {
+    public async Task<IActionResult> Create (HotelModel hotel) {
       if (ModelState.IsValid) {
         _dbContext.Add(hotel);
 
