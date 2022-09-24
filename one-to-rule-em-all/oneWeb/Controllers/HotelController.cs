@@ -91,10 +91,38 @@ namespace oneWeb.Controllers {
       return View(hotel);
     }
 
-    // TODO
-    // Change return types!
-    public IActionResult Delete (int? id) {
-      return View();
+    // ------------------------------------------------------------
+    // GET: Delete hotel
+    public async Task<IActionResult> Delete (int? id) {
+      if (id == null) {
+        return NotFound();
+      }
+      
+      HotelModel? hotel = await _dbContext.Hotels.FirstOrDefaultAsync(h => h.Id == id);
+      if (hotel == null) {
+        return NotFound();
+      }
+
+      return View(hotel);
+    }
+
+    // POST: Delete hotel
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteHotel (int? id) {
+      if (id == null) {
+        return NotFound();
+      }
+
+      HotelModel? hotel = await _dbContext.Hotels.FindAsync(id);
+      if (hotel == null) {
+        return NotFound();
+      }
+
+      _dbContext.Hotels.Remove(hotel);
+      await _dbContext.SaveChangesAsync();
+
+      return RedirectToAction("Index");
     }
   }
 }
