@@ -7,9 +7,8 @@
 
 <div style="display: flex; justify-content: space-between; padding: 2% 0 1% 0">
   <h1>&nbsp;Hotels</h1>
-  <button style="background-color: forestgreen; width: 10%; font-size: 1.3rem;">
-    Add hotel
-  </button>
+  <a asp-controller="Hotel" asp-action="Create" class="btn btn-primary"
+  >Add hotel</a>
 </div>
 
 <div style="padding: 1rem; border: 0.2rem solid darkred; border-radius: 0.3rem;">
@@ -44,11 +43,21 @@
                     <div style="width: 60%;">@hotel.Address</div>
                 </div>
 
-                <div style="display: flex;">
-                    <button style="width: 100%; border-radius: 0.3rem;"
-                      type="button" value="@hotel.Id"
-                      onclick="location.href='@Url.Action("Details", "Hotel")'"
-                    >See more</button>
+                <div style="display: flex; justify-content: space-evenly;">
+                    @*READ*@
+                    <a class="btn btn-primary" style="width:25%;"
+                      asp-controller="Hotel" asp-action="Details" asp-route-id="@hotel.Id"
+                    >See more</a>
+
+                    @*UPDATE*@
+                    <a class="btn btn-primary" style="width:25%;"
+                      asp-controller="Hotel" asp-action="Edit" asp-route-id="@hotel.Id"
+                    >Edit</a>
+
+                    @*DELETE*@
+                    <a class="btn btn-primary" style="width:25%;"
+                      asp-controller="Hotel" asp-action="Delete" asp-route-id="@hotel.Id"
+                    >Delete</a>
                 </div>
       </div>
     </div>
