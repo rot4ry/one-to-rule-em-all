@@ -2,10 +2,99 @@
 @model oneWeb.Models.HotelModel
 
 @{
-    ViewData["Title"] = "Hotel details";
+    ViewData["Title"] = @Model.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div style="display: flex; justify-content: space-between; padding: 2% 0 1% 0">
-    <h1>&nbsp;@ViewData["Title"]</h1>
+  <div style="display: flex; justify-content: flex-start; width: 50%;">
+    <h1 style="color:forestgreen">&nbsp;@ViewData["Title"]</h1>
+    <h1>&nbsp;- hotel details</h1>
+  </div>
+
+  <div style="display: flex;justify-content: flex-end; width: 50%;">
+    @*UPDATE*@
+    <a class="btn btn-primary" style="width:15%;"
+      asp-controller="Hotel" asp-action="Edit" asp-route-id="@Model.Id"
+    >Edit</a>
+
+    @*DELETE*@
+    <a class="btn btn-danger" style="width:15%; margin: 0 1% 0 1%"
+      asp-controller="Hotel" asp-action="Delete" asp-route-id="@Model.Id"
+    >Delete</a>
+
+    <a class="btn btn-primary" style="width: 15%;"
+    asp-controller="Hotel" asp-action="Index" 
+    >Back</a>
+  </div>
+</div>
+
+<div style="width: 100%; padding: 1rem; border-radius: 0.5rem; background-color:darkslategrey;
+  display: flex; flex-direction: column; align-items: center;"
+>
+    @*PHOTOS*@
+    <div style="display: flex; width: 70%; justify-content: center">
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        
+        <div style="display: flex; margin-bottom: 0.5rem;">
+          @*TODO: img carousel*@
+          <img src="~/img/placeholder.png" style="width: 100%; display: block; border-radius: 0.5rem;"/>
+        </div>
+        
+        <div style="display: flex">
+          <ul class="pagination">
+            <li class="page-item disabled">
+                <a class="page-link" href="#">&laquo;</a>
+            </li>
+            <li class="page-item active">
+                <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">3</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">&raquo;</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    @*HOTEL INFO*@
+    <div style="display: flex; flex-direction: column; width: 70%; justify-content: center">
+      <table class="table table-hover" style="width: 100%;">
+        <tr class="table-primary">
+          <td style="width: 20%; text-align: center"
+          >@Html.DisplayNameFor(model => model.Id)</td>
+          <td>@Model.Id</td>
+        </tr>
+
+        <tr class="table-primary">
+          <td style="width: 20%; text-align: center"
+          >@Html.DisplayNameFor(model => model.Name)</td>
+          <td>@Model.Name</td>
+        </tr>
+
+        <tr class="table-primary">
+          <td style="width: 20%; text-align: center"
+          >@Html.DisplayNameFor(model => model.Country)</td>
+          <td>@Model.Country</td>
+        </tr>
+
+        <tr class="table-primary">
+          <td style="width: 20%; text-align: center"
+          >@Html.DisplayNameFor(model => model.City)</td>
+          <td>@Model.City</td>
+        </tr>
+
+        <tr class="table-primary">
+          <td style="width: 20%; text-align: center"
+          >@Html.DisplayNameFor(model => model.Address)</td>
+          <td>@Model.Address</td>
+        </tr>
+      </table>
+    </div>
 </div>
