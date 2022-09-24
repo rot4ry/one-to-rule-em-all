@@ -5,7 +5,7 @@ namespace oneWeb.Models {
   public class PhotoModel {
     [Key]
     public int Id { get; set; }
-    
+
     [ForeignKey("Id")] // test? needed?
     public int HotelId { get; set; }
 

@@ -19,7 +19,7 @@ namespace oneWeb.Models {
     [Required]
     [DisplayName("Rezerwacja od")]
     public DateTime DateStart { get; set; }
-    
+
     [Required]
     [DisplayName("Rezerwacja do")]
     public DateTime DateEnd { get; set; }
