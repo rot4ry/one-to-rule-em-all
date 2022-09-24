@@ -27,7 +27,7 @@ namespace oneWeb.Controllers {
     public async Task<IActionResult> Create (HotelModel hotel) {
       if (ModelState.IsValid) {
         _dbContext.Add(hotel);
-
+        // add photos?
         await _dbContext.SaveChangesAsync();
 
         return RedirectToAction("Index");
@@ -36,10 +36,19 @@ namespace oneWeb.Controllers {
       }
     }
 
-    // TODO:
-    // Change return types!
-    public IActionResult Details (int? id) {
-      return View();
+    // GET: Show hotel details
+    // todo: use viewmodel to get photos?
+    public async Task<IActionResult> Details (int? id) {
+      if (id == null) {
+        return NotFound();
+      }
+
+      HotelModel? hotel = await _dbContext.Hotels.FirstOrDefaultAsync(h => h.Id == id);
+      if (hotel == null) {
+        return NotFound();
+      }
+
+      return View(hotel);
     }
 
     // TODO
