@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using oneWeb.Database;
 using oneWeb.Models;
+using System.Data;
 
 namespace oneWeb.Controllers {
   public class HotelController: Controller {
@@ -16,6 +17,7 @@ namespace oneWeb.Controllers {
       return View(await _dbContext.Hotels.ToListAsync());
     }
 
+    // ------------------------------------------------------------
     // GET: Create hotel
     public IActionResult Create () {
       return View();
@@ -36,6 +38,7 @@ namespace oneWeb.Controllers {
       }
     }
 
+    // ------------------------------------------------------------
     // GET: Show hotel details
     // todo: use viewmodel to get photos?
     public async Task<IActionResult> Details (int? id) {
@@ -51,6 +54,7 @@ namespace oneWeb.Controllers {
       return View(hotel);
     }
 
+    // ------------------------------------------------------------
     // GET: Edit hotel
     public async Task<IActionResult> Edit (int? id) {
       if (id == null) {
@@ -60,6 +64,28 @@ namespace oneWeb.Controllers {
       HotelModel? hotel = await _dbContext.Hotels.FirstOrDefaultAsync(h => h.Id == id);
       if (hotel == null) {
         return NotFound();
+      }
+
+      return View(hotel);
+    }
+
+    // POST: Update hotel
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit (int id, HotelModel hotel) {
+      if (id != hotel.Id) {
+        return NotFound();
+      }
+
+      if (ModelState.IsValid) {
+        try {
+          _dbContext.Hotels.Update(hotel);
+          await _dbContext.SaveChangesAsync();
+        } catch (Exception e) {
+          return NotFound();
+        }
+        
+        return RedirectToAction("Index");
       }
 
       return View(hotel);

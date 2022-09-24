@@ -7,5 +7,48 @@
 }
 
 <div style="display: flex; justify-content: space-between; padding: 2% 0 1% 0">
-    <h1>&nbsp;@ViewData["Title"]</h1>
+    <h1>&nbsp;@ViewData["Title"] - @Model.Name</h1>
 </div>
+
+<div style="display: flex; justify-content: flex-start; width: 60%;
+  border: 0.2rem solid darkred; border-radius: 0.3rem; padding: 1rem;"
+>
+  <form method="post" asp-controller="Hotel" asp-action="Edit" style="width: 100%">
+    <div style="display: flex; flex-direction: column;">
+      <label asp-for="Name" class="form-label text-light"></label>
+      <input asp-for="Name" class="form-control" style="background-color:darkslategray; border-color: black; color: azure" />
+      <span asp-validation-for="Name" class="text-danger" style="margin-bottom: 0.8rem;"></span>
+
+      <label asp-for="Country" class="form-label text-light"></label>
+      <input asp-for="Country" class="form-control" style="background-color:darkslategray; border-color: black; color: azure" />
+      <span asp-validation-for="Country" class="text-danger" style="margin-bottom: 0.8rem;"></span>
+
+      <label asp-for="City" class="form-label text-light"></label>
+      <input asp-for="City" class="form-control" style="background-color:darkslategray; border-color: black; color: azure" />
+      <span asp-validation-for="City" class="text-danger" style="margin-bottom: 0.8rem;"></span>
+
+      <label asp-for="Address" class="form-label text-light"></label>
+      <input asp-for="Address" class="form-control" style="background-color:darkslategray; border-color: black; color: azure" />
+      <span asp-validation-for="Address" class="text-danger" style="margin-bottom: 0.8rem;"></span>
+      <br /><hr />
+
+      <input type="submit" value="Update data"
+        class="btn btn-danger text-bg-light" style="width: 100%; margin-top: 1%;"
+      />
+    </div>
+  </form>
+</div>
+
+<br />
+<hr />
+<div style="padding: 1rem 2rem 1rem 2rem; width: 30%; background-color: darkslategray; border-radius: 0.3rem; margin-top: 0.5rem;">
+  <a class="btn btn-primary" style="width: 100%"
+    asp-controller="Hotel" asp-action="Details" asp-route-id="@Model.Id"
+  >Back</a>
+</div>
+
+@section Scripts {
+  @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+  }
+}
