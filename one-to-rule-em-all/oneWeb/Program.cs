@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using oneWeb.Database;
+using Microsoft.AspNetCore.Identity;
+using oneWeb.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,9 @@ builder.Services.AddDbContext<OneDBContext>(
     builder.Configuration.GetConnectionString("DBConnection")
   )
 );
+
+builder.Services.AddDefaultIdentity<oneWebUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<oneIdentityContext>();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
 // When ALL services registered (!!!)
@@ -25,6 +30,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();;
 
 // app.UseAuthentication(); TODO
 app.UseAuthorization();
