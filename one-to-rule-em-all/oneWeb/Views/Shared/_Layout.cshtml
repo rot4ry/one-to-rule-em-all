@@ -24,28 +24,15 @@
                 >
                     <ul class="navbar-nav" style="display: flex;">
                       <li class="nav-item">
-                          <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                      </li>
-
-                      <li class="nav-item">
                           <a class="nav-link text-light" asp-area="" asp-controller="Hotel" asp-action="Index">Our hotels</a>
                       </li>
 
                       <li class="nav-item">
                           <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                       </li>
-                    </ul>
-                    
-                    <ul class="navbar-nav" style="display: flex; width: 20%">
-                      <li class="nav-item" style="width: 50%">
-                        <a class="nav-link text-danger text-center" asp-area="" asp-controller="Home" asp-action="Index">Sign up</a>
-                      </li>
-
-                      <li class="nav-item" style="width: 50%">
-                        <a class="nav-link text-danger text-center" asp-area="" asp-controller="Home" asp-action="Index">Sign in</a>
-                      </li>
-                    </ul>
+                    </ul>                    
                 </div>
+                <partial name="_LoginPartial" />
             </div>
         </nav>
     </header>
