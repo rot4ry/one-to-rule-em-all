@@ -16,6 +16,7 @@ namespace oneWeb.Models {
     public string Surname { get; set; }
 
     [Required]
+    [EmailAddress]
     [DisplayName("Adres e-mail")]
     public string Email { get; set; }
 
