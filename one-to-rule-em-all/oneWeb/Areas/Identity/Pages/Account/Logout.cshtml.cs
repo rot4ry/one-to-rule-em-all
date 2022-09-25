@@ -9,16 +9,16 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using oneWeb.Areas.Identity.Data;
+using oneWeb.Models;
 
 namespace oneWeb.Areas.Identity.Pages.Account
 {
     public class LogoutModel : PageModel
     {
-        private readonly SignInManager<oneWebUser> _signInManager;
+        private readonly SignInManager<UserModel> _signInManager;
         private readonly ILogger<LogoutModel> _logger;
 
-        public LogoutModel(SignInManager<oneWebUser> signInManager, ILogger<LogoutModel> logger)
+        public LogoutModel(SignInManager<UserModel> signInManager, ILogger<LogoutModel> logger)
         {
             _signInManager = signInManager;
             _logger = logger;

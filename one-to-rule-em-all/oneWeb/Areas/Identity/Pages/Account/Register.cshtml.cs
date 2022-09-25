@@ -18,29 +18,29 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using oneWeb.Areas.Identity.Data;
+using oneWeb.Models;
 
 namespace oneWeb.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<oneWebUser> _signInManager;
-        private readonly UserManager<oneWebUser> _userManager;
-        private readonly IUserStore<oneWebUser> _userStore;
-        private readonly IUserEmailStore<oneWebUser> _emailStore;
+        private readonly SignInManager<UserModel> _signInManager;
+        private readonly UserManager<UserModel> _userManager;
+        private readonly IUserStore<UserModel> _userStore;
+        private readonly IUserEmailStore<UserModel> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
-            UserManager<oneWebUser> userManager,
-            IUserStore<oneWebUser> userStore,
-            SignInManager<oneWebUser> signInManager,
+            UserManager<UserModel> userManager,
+            IUserStore<UserModel> userStore,
+            SignInManager<UserModel> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
             _userStore = userStore;
-            _emailStore = GetEmailStore();
+            _emailStore = (IUserEmailStore<UserModel>)GetEmailStore();
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
@@ -155,27 +155,27 @@ namespace oneWeb.Areas.Identity.Pages.Account
             return Page();
         }
 
-        private oneWebUser CreateUser()
+        private UserModel CreateUser ()
         {
             try
             {
-                return Activator.CreateInstance<oneWebUser>();
+                return Activator.CreateInstance<UserModel>();
             }
             catch
             {
-                throw new InvalidOperationException($"Can't create an instance of '{nameof(oneWebUser)}'. " +
-                    $"Ensure that '{nameof(oneWebUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(UserModel)}'. " +
+                    $"Ensure that '{nameof(UserModel)}' is not an abstract class and has a parameterless constructor, or alternatively " +
                     $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
         }
 
-        private IUserEmailStore<oneWebUser> GetEmailStore()
+        private IUserEmailStore<UserModel> GetEmailStore()
         {
             if (!_userManager.SupportsUserEmail)
             {
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
-            return (IUserEmailStore<oneWebUser>)_userStore;
+            return (IUserEmailStore<UserModel>)_userStore;
         }
     }
 }
