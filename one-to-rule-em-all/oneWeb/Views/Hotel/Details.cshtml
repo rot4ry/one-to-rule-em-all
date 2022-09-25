@@ -1,5 +1,8 @@
-﻿@*viewmodel?*@
+﻿@using Microsoft.AspNetCore.Identity
 @model oneWeb.Models.HotelModel
+
+@inject SignInManager<UserModel> SignInManager
+@inject UserManager<UserModel> UserManager
 
 @{
     ViewData["Title"] = @Model.Name;
@@ -13,15 +16,17 @@
   </div>
 
   <div style="display: flex;justify-content: flex-end; width: 50%;">
-    @*UPDATE*@
-    <a class="btn btn-primary" style="width:15%;"
-      asp-controller="Hotel" asp-action="Edit" asp-route-id="@Model.Id"
-    >Edit</a>
+    @if (SignInManager.IsSignedIn(User) && UserManager.GetUserAsync(User).Result.isAdmin) {
+      @*UPDATE*@
+      <a class="btn btn-primary" style="width:15%;"
+        asp-controller="Hotel" asp-action="Edit" asp-route-id="@Model.Id"
+      >Edit</a>
 
-    @*DELETE*@
-    <a class="btn btn-danger" style="width:15%; margin: 0 1% 0 1%"
-      asp-controller="Hotel" asp-action="Delete" asp-route-id="@Model.Id"
-    >Delete</a>
+      @*DELETE*@
+      <a class="btn btn-danger" style="width:15%; margin: 0 1% 0 1%"
+        asp-controller="Hotel" asp-action="Delete" asp-route-id="@Model.Id"
+      >Delete</a>
+    }
 
     <a class="btn btn-primary" style="width: 15%;"
       asp-controller="Hotel" asp-action="Index" 

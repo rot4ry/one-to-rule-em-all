@@ -1,4 +1,8 @@
-﻿@model IEnumerable<oneWeb.Models.HotelModel>
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<oneWeb.Models.HotelModel>
+
+@inject SignInManager<UserModel> SignInManager
+@inject UserManager<UserModel> UserManager
 
 @{
     ViewData["Title"] = "Hotels";
@@ -7,8 +11,10 @@
 
 <div style="display: flex; justify-content: space-between; padding: 2% 0 1% 0">
   <h1>&nbsp;Hotels</h1>
-  <a asp-controller="Hotel" asp-action="Create" class="btn btn-primary"
-  >Add hotel</a>
+  @if (SignInManager.IsSignedIn(User) && UserManager.GetUserAsync(User).Result.isAdmin) {
+    <a asp-controller="Hotel" asp-action="Create" class="btn btn-primary"
+    >Add hotel</a>
+  }
 </div>
 
 <div style="padding: 1rem; border: 0.2rem solid darkred; border-radius: 0.3rem;">

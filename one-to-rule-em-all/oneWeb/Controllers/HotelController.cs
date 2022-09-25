@@ -1,16 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using oneWeb.Database;
 using oneWeb.Models;
-using System.Data;
 
 namespace oneWeb.Controllers {
   public class HotelController: Controller {
     private readonly OneDBContext _dbContext;
+    private readonly UserManager<UserModel> _userManager;
+    private readonly SignInManager<UserModel> _signInManager;
 
-    public HotelController (OneDBContext dbContext) {
+    public HotelController (OneDBContext dbContext, UserManager<UserModel> userManager, SignInManager<UserModel> signInManager) {
       _dbContext = dbContext;
+      _userManager = userManager;
+      _signInManager = signInManager;
     }
+
+    private bool AdminSignedIn () => _signInManager.IsSignedIn(User) && _userManager.GetUserAsync(User).Result.isAdmin;
 
     // GET: Hotel list
     public async Task<IActionResult> Index () {
@@ -20,13 +26,21 @@ namespace oneWeb.Controllers {
     // ------------------------------------------------------------
     // GET: Create hotel
     public IActionResult Create () {
-      return View();
+      if (AdminSignedIn()) {
+        return View();
+      } else {
+        return RedirectToAction("Index");
+      }
     }
-
+    
     // POST: Create hotel
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create (HotelModel hotel) {
+      if (!AdminSignedIn()) {
+        return RedirectToAction("Index");
+      }
+
       if (ModelState.IsValid) {
         _dbContext.Add(hotel);
         // add photos?
@@ -57,6 +71,10 @@ namespace oneWeb.Controllers {
     // ------------------------------------------------------------
     // GET: Edit hotel
     public async Task<IActionResult> Edit (int? id) {
+      if (!AdminSignedIn()) {
+        return RedirectToAction("Index");
+      }
+
       if (id == null) {
         return NotFound();
       }
@@ -73,6 +91,10 @@ namespace oneWeb.Controllers {
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit (int id, HotelModel hotel) {
+      if (!AdminSignedIn()) {
+        return RedirectToAction("Index");
+      }
+
       if (id != hotel.Id) {
         return NotFound();
       }
@@ -94,6 +116,10 @@ namespace oneWeb.Controllers {
     // ------------------------------------------------------------
     // GET: Delete hotel
     public async Task<IActionResult> Delete (int? id) {
+      if (!AdminSignedIn()) {
+        return RedirectToAction("Index");
+      }
+
       if (id == null) {
         return NotFound();
       }
@@ -110,6 +136,10 @@ namespace oneWeb.Controllers {
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteHotel (int? id) {
+      if (!AdminSignedIn()) {
+        return RedirectToAction("Index");
+      }
+
       if (id == null) {
         return NotFound();
       }
