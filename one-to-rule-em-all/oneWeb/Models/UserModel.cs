@@ -1,28 +1,28 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-// Identity
 namespace oneWeb.Models {
-  public class UserModel {
+  public class UserModel : IdentityUser {
     [Key]
-    public int Id { get; set; }
+    public string? Id { get; set; }
 
     [Required]
     [DisplayName("Imię")]
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
     [Required]
     [DisplayName("Nazwisko")]
-    public string Surname { get; set; }
+    public string? Surname { get; set; }
 
     [Required]
     [DisplayName("Adres e-mail")]
-    public string Email { get; set; } // regex pattern?
+    public string? Email { get; set; }
 
     [Required]
     [MinLength(6)]
     [DisplayName("Hasło")]
-    public string Password { get; set; }
+    public string? Password { get; set; }
 
     [Required]
     [DisplayName("Admin")]

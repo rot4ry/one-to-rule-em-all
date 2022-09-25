@@ -1,20 +1,22 @@
 using Microsoft.EntityFrameworkCore;
 using oneWeb.Database;
 using Microsoft.AspNetCore.Identity;
-using oneWeb.Data;
+using oneWeb.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddDbContext<OneDBContext>(
   options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DBConnection")
   )
 );
 
-builder.Services.AddDefaultIdentity<oneWebUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<oneIdentityContext>();
+builder.Services.AddDefaultIdentity<UserModel>(options => options.SignIn.RequireConfirmedAccount = false) // true?
+    .AddEntityFrameworkStores<OneDBContext>();
+
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
 // When ALL services registered (!!!)
@@ -30,13 +32,14 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthentication();;
 
-// app.UseAuthentication(); TODO
+app.UseAuthentication();;
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages(); // for Identity to work
 
 app.Run();

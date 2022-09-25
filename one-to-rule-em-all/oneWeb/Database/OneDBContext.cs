@@ -1,12 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using oneWeb.Models;
 
 namespace oneWeb.Database {
-  public class OneDBContext : DbContext {
+  public class OneDBContext : IdentityDbContext <UserModel> {
     public OneDBContext (DbContextOptions<OneDBContext> options) : base(options) {
     }
 
-    // done
     public DbSet<HotelModel> Hotels { get; set; }
     public DbSet<PhotoModel> Photos { get; set; }
     public DbSet<UserModel> Users { get; set; }
