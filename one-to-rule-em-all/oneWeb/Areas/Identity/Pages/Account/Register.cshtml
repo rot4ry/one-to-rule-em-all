@@ -5,27 +5,50 @@
 }
 
 <div class="row" style="padding: 2rem;">
-    <h1 style="color: forestgreen">@ViewData["Title"]</h1>
-    <div class="col-md-4">
-        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h2>Create a new account.</h2>
-            <hr />
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+  <h1 style="color: forestgreen">@ViewData["Title"]</h1>
+  <div class="col-md-4">
+    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+      <h2>Create a new account.</h2><hr />
             <div class="form-floating">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+                <input asp-for="Input.Name" class="form-control" autocomplete="name" aria-required="true" />
+                <label asp-for="Input.Name"></label>
+                <span asp-validation-for="Input.Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating">
+                <input asp-for="Input.Surname" class="form-control" autocomplete="surname" aria-required="true" />
+                <label asp-for="Input.Surname"></label>
+                <span asp-validation-for="Input.Surname" class="text-danger"></span>
+            </div>
+            
+            <div class="form-floating">
+                <input asp-for="Input.Email" class="form-control" autocomplete="email" aria-required="true" />
                 <label asp-for="Input.Email"></label>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
+            
             <div class="form-floating">
                 <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
                 <label asp-for="Input.Password"></label>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
+
             <div class="form-floating">
                 <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
                 <label asp-for="Input.ConfirmPassword"></label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
+
+            <div class="form-floating"
+              style="background-color: darkslategray; border-radius: 0.5rem; margin: 2rem 0 2rem 0; padding: 1rem;"
+            >
+                <div class="form-check form-switch" style="display: flex; justify-content: space-around;">
+                    <label class="form-check-label text-danger" for="flexSwitchCheckDefault" asp-for="Input.isAdmin">Admin</label>
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" asp-for="Input.isAdmin">
+                </div>
+                <span asp-validation-for="Input.isAdmin" class="text-danger"></span>
+            </div>
+
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
         </form>
     </div>
